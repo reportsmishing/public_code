@@ -1,5 +1,5 @@
-# public_code
-Bunch of scripts helping to investigate smishing URLs
+# Smishing URL investigation
+Bunch of scripts helping to investigate smishing URLs. We will continue to add more scripts as we proceed.
 
 ## Installation
 ```
