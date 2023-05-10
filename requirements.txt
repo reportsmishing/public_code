@@ -1,2 +1,1 @@
 virustotal-python==1.0.0
-pysafebrowsing==0.1.2
