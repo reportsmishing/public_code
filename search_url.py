@@ -2,7 +2,6 @@ import requests, argparse, json
 import virustotal_python
 from pprint import pprint
 from base64 import urlsafe_b64encode
-from pysafebrowsing import SafeBrowsing
 
 def nslookup(url):
    main_url = "https://dns-lookup5.p.rapidapi.com/simple"
@@ -19,10 +18,18 @@ def nslookup(url):
 
 def safe_browsing(url):
    key='<Enter Google SafeBrowsing Key>'
-   s = SafeBrowsing(key)
-   r = s.lookup_url(url)
+   url = "https://safebrowsing.googleapis.com/v4/threatMatches:find"
+   payload = {'client': {'clientId': "phishing", 'clientVersion': "0.1"},
+              'threatInfo': {'threatTypes': ["SOCIAL_ENGINEERING", "MALWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
+                             'platformTypes': ["ANY_PLATFORM"],
+                             'threatEntryTypes': ["URL"],
+                             'threatEntries': [{'url': "http://malware.testing.google.test/testing/malware/"}]
+                            }
+             }
+   params = {'key': api_key}
+   response = requests.post(url, params=params, json=payload)
    print("Google Safe SafeBrowsing Results:")
-   print(r)
+   print(response.json())
    print("----------------------------------------------------------------------------------------------------------")
 
 def virustotal_search(url):
